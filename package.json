@@ -1,0 +1,13 @@
+{
+  "name": "unocss-preset-mingled",
+  "version": "0.1.0",
+  "description": "Unocss preset mingled",
+  "module": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/softkittens/unocss-preset-mingled.git"
+  },
+  "type": "module",
+  "author": "aileksandar",
+  "license": "MIT"
+}
