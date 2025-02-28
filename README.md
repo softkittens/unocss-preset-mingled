@@ -1,7 +1,8 @@
 # UnoCSS Mingled Preset
 
 <div align="center">
-  <img src="https://em-content.zobj.net/source/apple/354/dna_1f9ec.png" width="96" height="96" alt="Mingled">
+  <img src="https://em-content.zobj.net/source/apple/354/dna_1f9ec.png" width="64" height="64" alt="Mingled">
+  <br><br>
 </div>
 
 <p align="center">
@@ -28,12 +29,6 @@
 ```bash
 # npm
 npm install unocss-preset-mingled -D
-
-# yarn
-yarn add unocss-preset-mingled -D
-
-# pnpm
-pnpm add unocss-preset-mingled -D
 ```
 
 ## 🛠️ Setup
