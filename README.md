@@ -1,7 +1,7 @@
 # UnoCSS Mingled Preset
 
 <div align="center">
-  <h1 style="border:none">🧬</h1>
+  <img src="https://em-content.zobj.net/source/apple/354/dna_1f9ec.png" width="128" height="128" alt="DNA emoji">
 </div>
 
 <p align="center">
