@@ -1,24 +1,72 @@
 # UnoCSS Mingled Preset
 
-This preset for UnoCSS provides a set of utility classes for rapid UI development. It includes rules for layout, spacing, typography, colors, and more.
+<p align="center">
+  <img src="https://raw.githubusercontent.com/softkittens/unocss-preset-mingled/main/logo.png" alt="UnoCSS Mingled Preset" width="180" />
+</p>
 
-## Installation
+<p align="center">
+  A concise CSS language for <a href="https://github.com/unocss/unocss">UnoCSS</a> that embraces being mingled with your HTML
+</p>
 
-To use this preset, add it to your UnoCSS configuration:
+<p align="center">
+  <a href="https://www.npmjs.com/package/unocss-preset-mingled"><img src="https://img.shields.io/npm/v/unocss-preset-mingled.svg" alt="npm package"></a>
+  <a href="https://github.com/softkittens/unocss-preset-mingled/blob/main/LICENSE"><img src="https://img.shields.io/github/license/softkittens/unocss-preset-mingled" alt="license"></a>
+</p>
 
-```javascript
-// in uno.config.js
-import { defineConfig } from 'unocss';
-import { mingled } from './unocss-preset-mingled';
+## ✨ Features
+
+- 🔤 **A New CSS Language**: Not just utilities, but a concise syntax for expressing CSS directly
+- � **Embrace the Mingle**: Designed to be comfortably mingled with your HTML markup
+- �🚀 **Lightweight & Fast**: Minimal footprint with maximum functionality
+- 🧩 **Intuitive Syntax**: Simple, memorable property-value pairs
+- 🎨 **Themeable**: Works with CSS variables for easy customization
+- 📱 **Responsive**: Built-in breakpoint system
+- 🔌 **Zero Config**: Works out of the box with sensible defaults
+
+## 📦 Installation
+
+```bash
+# npm
+npm install unocss-preset-mingled -D
+
+# yarn
+yarn add unocss-preset-mingled -D
+
+# pnpm
+pnpm add unocss-preset-mingled -D
+```
+
+## 🛠️ Setup
+
+Add the preset to your UnoCSS configuration:
+
+```js
+// uno.config.js
+import { defineConfig } from 'unocss'
+import { mingled } from 'unocss-preset-mingled'
+
 export default defineConfig({
   presets: [
     mingled(),
     // ... other presets
   ],
-});
+})
 ```
 
-## Detailed Rule Documentation
+## 🎯 Quick Start
+
+Mingled is a CSS language that's meant to be mingled directly in your HTML. It uses an intuitive property:value syntax that closely mirrors CSS itself:
+
+```html
+<!-- A card component using Mingled language -->
+<div class="p:16 r:8 b:#eee bg:white shadow:2|2|10|0|(0,0,0,0.1)">
+  <h3 class="f:18 fw:bold mb:8">Card Title</h3>
+  <p class="f:14 c:#666 mb:16">This is a simple card built with Mingled.</p>
+  <button class="bg:blue c:white p:8|16 r:4 pointer">Learn More</button>
+</div>
+```
+
+## 📚 Utility Reference
 
 ### Layout
 
@@ -343,7 +391,82 @@ Examples:
    </div>
    ```
 
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+[MIT](LICENSE)
+
 ## Acknowledgments
 
-This preset is heavily inspired by [mastercss](https://css.master.co/) and first implemented for react native as 
-[mingled](https://github.com/softkittens/mingled) and meant as a replacement for tailwindcss.
+This preset is inspired by [mastercss](https://css.master.co/) and was first implemented for React Native as [mingled](https://github.com/softkittens/mingled). Like Master CSS, Mingled aims to be a new language for CSS rather than just a collection of utility classes, while maintaining compatibility with the UnoCSS ecosystem.
+
+## 💡 Why Mingled?
+
+The name "Mingled" reflects our philosophy: CSS properties and values should be comfortably mingled with your HTML, creating a seamless development experience. Unlike traditional separation of concerns, Mingled embraces the reality that styles and markup often evolve together.
+
+Mingled isn't just a collection of utility classes—it's a concise language for expressing CSS directly in your HTML. The syntax is designed to be intuitive and closely mirror CSS itself, but with less verbosity.
+
+**Comparison with other approaches:**
+
+| Concept | Traditional CSS | Tailwind CSS | Mingled |
+|---------|----------------|--------------|---------|
+| Philosophy | Separation of concerns | Utility-first | CSS as a language in HTML |
+| Padding | `padding: 16px;` | `p-4` | `p:16` |
+| Margin | `margin: 16px;` | `m-4` | `m:16` |
+| Text color | `color: blue;` | `text-blue-500` | `c:blue` |
+| Flex center | `display: flex; justify-content: center; align-items: center;` | `flex justify-center items-center` | `flex:center` |
+| Border | `border: 1px solid #eee;` | `border border-gray-200` | `b:#eee` |
+
+## 🔄 Migration from Tailwind
+
+If you're coming from Tailwind CSS, here's a quick reference to help you translate common utilities:
+
+| Tailwind | Mingled |
+|----------|---------|
+| `p-4` | `p:16` |
+| `px-4` | `px:16` |
+| `mt-2` | `mt:8` |
+| `text-lg` | `f:18` |
+| `font-bold` | `fw:bold` or `bold` |
+| `text-blue-500` | `c:blue` |
+| `bg-gray-100` | `bg:#f5f5f5` |
+| `flex items-center justify-between` | `flex:between\|center` |
+| `rounded-lg` | `r:8` |
+| `hover:bg-blue-600` | `bg:darkblue:hover` |
+
+## 🧪 Examples
+
+### Responsive Layout
+
+```html
+<div class="flex:between|center flex-col:center@sm">
+  <div class="w:50% w:100%@sm p:16">
+    <h2 class="f:24 f:20@sm mb:16">Left Column</h2>
+    <p class="f:16 lh:1.5">Content goes here...</p>
+  </div>
+  <div class="w:50% w:100%@sm p:16">
+    <h2 class="f:24 f:20@sm mb:16">Right Column</h2>
+    <p class="f:16 lh:1.5">More content here...</p>
+  </div>
+</div>
+```
+
+### Interactive Button
+
+```html
+<button class="
+  p:8|16 
+  r:4 
+  bg:blue 
+  c:white 
+  b:none 
+  pointer 
+  bg:darkblue:hover 
+  transform:scale(0.98):active
+">
+  Click Me
+</button>
+```
