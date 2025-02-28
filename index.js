@@ -1,31 +1,31 @@
-import { transformerVariantGroup } from 'unocss'
+import { transformerVariantGroup } from 'unocss';
 
 function pxToRem(value) {
   if (isNaN(value)) {
-    return value
+    return value;
   }
-  return `${value / 16}rem`
+  return `${value / 16}rem`;
 }
 
 function handleColor(color) {
   if (color.includes('/')) {
-    const [baseColor, opacity] = color.split('/')
-    const opacityPercentage = parseInt(opacity)
+    const [baseColor, opacity] = color.split('/');
+    const opacityPercentage = parseInt(opacity);
     if (baseColor.startsWith('#')) {
-      return `color-mix(in srgb, ${baseColor} ${opacityPercentage}%, transparent)`
+      return `color-mix(in srgb, ${baseColor} ${opacityPercentage}%, transparent)`;
     }
     // For non-hex colors, assume it's a named color or will be a CSS variable
-    return `color-mix(in srgb, var(--color-${baseColor}, ${baseColor}) ${opacityPercentage}%, transparent)`
+    return `color-mix(in srgb, var(--color-${baseColor}, ${baseColor}) ${opacityPercentage}%, transparent)`;
   }
   if (color.startsWith('#')) {
-    return color
+    return color;
   }
-  return `var(--color-${color}, ${color})`
+  return `var(--color-${color}, ${color})`;
 }
 
 function handleSpacing(value) {
-  const parts = value.split('|').map((part) => (part === '' ? '0' : part))
-  return parts.map(pxToRem).join(' ')
+  const parts = value.split('|').map((part) => (part === '' ? '0' : part));
+  return parts.map(pxToRem).join(' ');
 }
 
 function handleFontWeight(weight) {
@@ -39,24 +39,24 @@ function handleFontWeight(weight) {
     bold: 700,
     xbold: 800,
     black: 900,
-  }
-  return weights[weight] || weight
+  };
+  return weights[weight] || weight;
 }
 
 function handleFlex(value, type) {
-  const direction = type === 'col' ? 'column' : 'row'
-  const display = type === 'inline' ? 'inline-flex' : 'flex'
+  const direction = type === 'col' ? 'column' : 'row';
+  const display = type === 'inline' ? 'inline-flex' : 'flex';
 
-  const styles = { display, 'flex-direction': direction }
+  const styles = { display, 'flex-direction': direction };
 
-  if (!value) return styles
+  if (!value) return styles;
 
   // If the value is a number, it's a flex-grow value
   if (!isNaN(value)) {
-    return { flex: `${value.split('|').join(' ')}` }
+    return { flex: `${value.split('|').join(' ')}` };
   }
 
-  const [justify, align] = value.split('|')
+  const [justify, align] = value.split('|');
 
   const justifyOptions = {
     start: 'flex-start',
@@ -65,7 +65,7 @@ function handleFlex(value, type) {
     between: 'space-between',
     around: 'space-around',
     evenly: 'space-evenly',
-  }
+  };
 
   const alignOptions = {
     start: 'flex-start',
@@ -73,42 +73,42 @@ function handleFlex(value, type) {
     center: 'center',
     stretch: 'stretch',
     baseline: 'baseline',
-  }
+  };
 
   if (justifyOptions[justify]) {
-    styles['justify-content'] = justifyOptions[justify]
+    styles['justify-content'] = justifyOptions[justify];
   }
 
   if (alignOptions[align]) {
-    styles['align-items'] = alignOptions[align]
+    styles['align-items'] = alignOptions[align];
   }
 
   if (justify === 'center' && align === null) {
-    styles['justify-content'] = 'center'
-    styles['align-items'] = 'center'
+    styles['justify-content'] = 'center';
+    styles['align-items'] = 'center';
   }
 
-  return styles
+  return styles;
 }
 
 function handleBorder(value) {
   if (value === '0' || value === 'none') {
-    return 'none'
+    return 'none';
   }
-  const [color, width = '1px', style = 'solid'] = value.split('|')
-  return `${width} ${style} ${handleColor(color)}`
+  const [color, width = '1', style = 'solid'] = value.split('|');
+  return `${width}px ${style} ${handleColor(color)}`;
 }
 
 function parseSidelength(value) {
   switch (value) {
     case 'full':
-      return `100%`
+      return `100%`;
     case 'screen':
-      return `100vh`
+      return `100vh`;
     case 'fit':
-      return `fit-content`
+      return `fit-content`;
     default:
-      return /^\d+$/.test(value) ? `${value}px` : `${value}`
+      return /^\d+$/.test(value) ? `${value}px` : `${value}`;
   }
 }
 
@@ -229,16 +229,29 @@ export function mingled() {
         }),
       ],
 
+      [/^pre-wrap$/, () => ({ 'white-space': 'pre-wrap' })],
+
       // Flex rules
       [/^flex(?:-?(col|inline))?(?::(.+))?$/, ([, type, value]) => handleFlex(value, type)],
       [/^flex-wrap$/, () => ({ 'flex-wrap': 'wrap' })],
       [/^gap:(\d+)$/, ([, s]) => ({ gap: `${s}px` })],
+
+      // Display rule
+      [/^block$/, () => ({ display: 'block' })],
+      [/^inline$/, () => ({ display: 'inline' })],
+      [/^inline-block$/, () => ({ display: 'inline-block' })],
 
       // Text transform rule
       [/^tt:(\w+)$/, ([, t]) => ({ 'text-transform': t })],
       [/^upper$/, () => ({ 'text-transform': 'uppercase' })],
       [/^lower$/, () => ({ 'text-transform': 'lowercase' })],
       [/^capitalize$/, () => ({ 'text-transform': 'capitalize' })],
+
+      // Text decoration rule
+      [/^td:(\w+)$/, ([, t]) => ({ 'text-decoration': t })],
+      [/^underline$/, () => ({ 'text-decoration': 'underline' })],
+      [/^line-through$/, () => ({ 'text-decoration': 'line-through' })],
+      [/^no-underline$/, () => ({ 'text-decoration': 'none' })],
 
       // Cursor rule
       [/^cursor:(\w+)$/, ([, c]) => ({ cursor: c })],
@@ -256,8 +269,23 @@ export function mingled() {
       [/^br:(.+)$/, ([, v]) => ({ 'border-right': handleBorder(v) })],
       [/^bl:(.+)$/, ([, v]) => ({ 'border-left': handleBorder(v) })],
 
-      // Border radius
-      [/^r:(\d+)$/, ([, s]) => ({ 'border-radius': `${s}px` })],
+      // Border radius - supports 1-4 values in clockwise order (top-left, top-right, bottom-right, bottom-left)
+      [
+        /^r:(\d+)(?:\|(\d+))?(?:\|(\d+))?(?:\|(\d+))?$/,
+        ([, tl, tr, br, bl]) => {
+          const topLeft = `${tl}px`;
+          const topRight = tr ? `${tr}px` : topLeft;
+          const bottomRight = br ? `${br}px` : topLeft;
+          const bottomLeft = bl ? `${bl}px` : topRight;
+
+          return {
+            'border-radius': `${topLeft} ${topRight} ${bottomRight} ${bottomLeft}`,
+          };
+        },
+      ],
+
+      // Outline
+      [/^outline:(.+)$/, ([, v]) => ({ outline: v })],
 
       // Opacity
       [/^o:(\d+(?:\.\d+)?)$/, ([, s]) => ({ opacity: s })],
@@ -270,6 +298,14 @@ export function mingled() {
       // Overflow hidden
       [/^ofh$/, () => ({ overflow: 'hidden' })],
 
+      // Shadow
+      [
+        /^shadow:(-?\d+)\|(-?\d+)\|(-?\d+)\|(-?\d+)\|\(([^)]+)\)$/,
+        ([, x, y, blur, spread, color]) => {
+          return { 'box-shadow': `${x}px ${y}px ${blur}px ${spread}px rgba(${color})` };
+        },
+      ],
+
       // Z-index
       [/^z:(\d+)$/, ([, s]) => ({ 'z-index': s })],
 
@@ -278,17 +314,24 @@ export function mingled() {
       [/^none$/, () => ({ appearance: 'none' })],
       [/^hide$/, () => ({ display: 'none' })],
 
+      // Position utilities
+      [/^rel$/, () => ({ position: 'relative' })],
+
       // Absolute position
       [
-        /^abs:(\d+)?(?:\|(\d+))?(?:\|(\d+))?(?:\|(\d+))?$/,
-        ([, top, right, bottom, left]) => ({
-          position: 'absolute',
-          top: top ? `${top}px` : undefined,
-          right: right ? `${right}px` : undefined,
-          bottom: bottom ? `${bottom}px` : undefined,
-          left: left ? `${left}px` : undefined,
-        }),
+        /^abs:([^|]*)?(?:\|([^|]*)?(?:\|([^|]*)?(?:\|([^|]*))?)?)?$/,
+        ([, top, right, bottom, left]) => {
+          const formatUnit = (val) => (val ? (val.includes('%') ? val : `${val}px`) : undefined);
+          return {
+            position: 'absolute',
+            top: formatUnit(top),
+            right: formatUnit(right),
+            bottom: formatUnit(bottom),
+            left: formatUnit(left),
+          };
+        },
       ],
+
       // Fixed position
       [
         /^fixed:(\d+)?(?:\|(\d+))?(?:\|(\d+))?(?:\|(\d+))?$/,
@@ -300,14 +343,32 @@ export function mingled() {
           left: left ? `${left}px` : undefined,
         }),
       ],
-      [/^rel$/, () => ({ position: 'relative' })],
-
 
       // bottom, top, left, right
       [/^bottom:(\d+)$/, ([, s]) => ({ bottom: `${s}px` })],
       [/^top:(\d+)$/, ([, s]) => ({ top: `${s}px` })],
       [/^left:(\d+)$/, ([, s]) => ({ left: `${s}px` })],
       [/^right:(\d+)$/, ([, s]) => ({ right: `${s}px` })],
+
+      // translate
+      [
+        /^translate:(-?\d+(?:\.\d+)?%?)?(\|(-?\d+(?:\.\d+)?%?))?$/,
+        ([, x, , y]) => {
+          const formatValue = (val) => (val ? (val.includes('%') ? val : `${val}px`) : '0');
+          return {
+            transform: `translate(${formatValue(x)}, ${formatValue(y)})`,
+          };
+        },
+      ],
+
+      // svg
+      [
+        /^stroke:([\w]+)(?:\|(\d+))?$/,
+        ([, c, w]) => ({
+          stroke: c,
+          'stroke-width': w ? `${w}px` : undefined,
+        }),
+      ],
 
       // Hide scrollbar
       [
@@ -322,34 +383,49 @@ export function mingled() {
     variants: [
       // Pseudo-class variant
       (matcher) => {
-        const pseudoClasses = ['hover', 'focus', 'active', 'visited', 'disabled']
+        const pseudoClasses = ['hover', 'focus', 'active', 'visited', 'disabled', 'focus-within'];
         for (const pseudo of pseudoClasses) {
           if (matcher.endsWith(`:${pseudo}`)) {
             return {
               matcher: matcher.slice(0, -(pseudo.length + 1)),
               selector: (s) => `${s}:${pseudo}`,
-            }
+            };
           }
         }
-        return matcher
+        return matcher;
+      },
+
+      (matcher) => {
+        if (matcher.endsWith('!')) {
+          return {
+            matcher: matcher.slice(0, -1),
+            body: (body) => {
+              const addImportant = (value) => (typeof value === 'string' ? `${value} !important` : value);
+
+              if (typeof body === 'string') return addImportant(body);
+              if (Array.isArray(body)) return body.map(([k, v]) => [k, addImportant(v)]);
+              return Object.fromEntries(Object.entries(body).map(([k, v]) => [k, addImportant(v)]));
+            },
+          };
+        }
       },
 
       (matcher, { theme }) => {
-        const match = matcher.match(/^(.+)@(sm|md|lg|xl)$/)
+        const match = matcher.match(/^(.+)@(sm|md|lg|xl)$/);
         if (match) {
-          const [, className, breakpoint] = match
+          const [, className, breakpoint] = match;
           return {
             matcher: className,
             handle: (input, next) => {
-              const bp = theme.breakpoints[breakpoint]
+              const bp = theme.breakpoints[breakpoint];
               return next({
                 ...input,
                 parent: `${input.parent ? `${input.parent} $$ ` : ''}@media (min-width: ${bp})`,
-              })
+              });
             },
-          }
+          };
         }
       },
     ],
-  }
+  };
 }

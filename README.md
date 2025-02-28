@@ -179,6 +179,10 @@ Examples:
   - `b:primary|2px`: 2px solid border using --color-primary
   - `b:#000|3px|dashed`: 3px dashed black border
   - `b:gray/50|1px`: 1px solid border with 50% opacity gray
+- `bt:{value}`, `br:{value}`, `bb:{value}`, `bl:{value}`: Set border on specific sides (top, right, bottom, left)
+- `r:{value}`: Set border radius
+  - Single value for all corners: `r:10`
+  - Multiple values using pipe separator for top-left, top-right, bottom-right, bottom-left: `r:10|5|20|15`
 
 Examples:
 
@@ -187,6 +191,9 @@ Examples:
 <div class="b:primary|2px|dotted">2px dotted border using primary color</div>
 <div class="b:#000/50|3px">3px border with 50% opacity black</div>
 <div class="b:none">No border</div>
+<div class="bt:#333 bb:#333">Borders on top and bottom only</div>
+<div class="r:10">10px border radius on all corners</div>
+<div class="r:10|20|10|20">Different border radius on each corner</div>
 ```
 
 ### Miscellaneous
@@ -200,6 +207,11 @@ Examples:
 - `appearance:{value}`: Set appearance property
 - `none`: Shorthand for `appearance:none`
 - `scroll:hide`: Hide scrollbars while maintaining scroll functionality
+- `hide`: Shorthand for `display:none`
+- `block`, `inline`, `inline-block`: Set display property
+- `rel`: Shorthand for `position:relative`
+- `fixed:{top}|{right}|{bottom}|{left}`: Set fixed positioning with optional values in pixels
+- `outline:{value}`: Set outline property
 
 ```html
 <button class="pointer">Clickable button</button>
@@ -208,6 +220,56 @@ Examples:
 <div class="ofx:scroll ofy:hidden">Horizontal scroll only</div>
 <div class="ofh w:200">Hidden overflow, fixed width</div>
 <div class="z:10">Element with z-index 10</div>
+<div class="hide">Hidden element</div>
+<div class="block">Block-level element</div>
+<div class="inline">Inline element</div>
+<div class="rel">Relatively positioned element</div>
+<div class="fixed:10|20|0|0">Fixed element with positioning</div>
+<div class="outline:none">Element without outline</div>
+```
+
+### Text Decoration and Formatting
+
+- `td:{value}`: Set text decoration (none, underline, line-through)
+- `underline`: Shorthand for `text-decoration:underline`
+- `line-through`: Shorthand for `text-decoration:line-through`
+- `no-underline`: Shorthand for `text-decoration:none`
+- `nowrap`: Prevent text wrapping
+- `ellipsis`: Add ellipsis to truncated text
+- `pre-wrap`: Set white-space to pre-wrap
+
+```html
+<span class="underline">Underlined text</span>
+<span class="line-through">Strikethrough text</span>
+<span class="td:none">No text decoration</span>
+<div class="nowrap">This text will not wrap</div>
+<div class="w:200 ellipsis">This text will be truncated with an ellipsis if it's too long</div>
+<pre class="pre-wrap">Preformatted text that wraps</pre>
+```
+
+### Transform and Positioning
+
+- `translate:{x}|{y}`: Transform element using translate
+  - Values can be in pixels or percentages
+  - Example: `translate:50%|0` or `translate:20|-10`
+
+```html
+<div class="translate:50%|0">Shifted right by 50%</div>
+<div class="translate:-10|20">Shifted left 10px and down 20px</div>
+```
+
+### SVG Utilities
+
+- `stroke:{color}|{width}`: Set SVG stroke color and optionally width
+  - Example: `stroke:blue|2` for blue stroke with 2px width
+
+```html
+<svg class="stroke:blue|2">
+  <!-- SVG content -->
+</svg>
+<svg class="stroke:primary">
+  <!-- SVG with primary color stroke -->
+</svg>
 ```
 
 ## Usage Tips

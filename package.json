@@ -1,6 +1,6 @@
 {
   "name": "unocss-preset-mingled",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "Unocss preset mingled",
   "module": "index.js",
   "repository": {
