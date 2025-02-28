@@ -1,7 +1,7 @@
 # UnoCSS Mingled Preset
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/softkittens/unocss-preset-mingled/main/logo.png" alt="UnoCSS Mingled Preset" width="180" />
+  <span style="font-size:100px">🧬</span>
 </p>
 
 <p align="center">
@@ -469,4 +469,3 @@ If you're coming from Tailwind CSS, here's a quick reference to help you transla
 ">
   Click Me
 </button>
-```
