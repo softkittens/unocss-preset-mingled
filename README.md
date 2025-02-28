@@ -1,7 +1,7 @@
 # UnoCSS Mingled Preset
 
 <div align="center">
-  <img src="https://em-content.zobj.net/source/apple/354/dna_1f9ec.png" width="128" height="128" alt="DNA emoji">
+  <img src="https://em-content.zobj.net/source/apple/354/dna_1f9ec.png" width="96" height="96" alt="Mingled">
 </div>
 
 <p align="center">
@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/unocss-preset-mingled"><img src="https://img.shields.io/npm/v/unocss-preset-mingled.svg" alt="npm package"></a>
-  <a href="https://github.com/softkittens/unocss-preset-mingled/blob/main/LICENSE"><img src="https://img.shields.io/github/license/softkittens/unocss-preset-mingled" alt="license"></a>
+  <a href="https://www.npmjs.com/package/unocss-preset-mingled"><img src="https://img.shields.io/badge/npm-v0.2.1-blue" alt="npm package"></a>
+  <a href="https://github.com/softkittens/unocss-preset-mingled/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-green" alt="license"></a>
 </p>
 
 ## ✨ Features
