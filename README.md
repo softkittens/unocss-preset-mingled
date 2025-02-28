@@ -16,9 +16,9 @@
 
 ## ✨ Features
 
-- 🔤 **A New CSS Language**: Not just utilities, but a concise syntax for expressing CSS directly
-- � **Embrace the Mingle**: Designed to be comfortably mingled with your HTML markup
-- �🚀 **Lightweight & Fast**: Minimal footprint with maximum functionality
+- 🤖 **A New CSS Language**: Not just utilities, but a concise syntax for expressing CSS directly
+- 🧬 **Embrace the Mingle**: Designed to be comfortably mingled with your HTML markup
+- ⚡️ **Lightweight & Fast**: Minimal footprint with maximum functionality
 - 🧩 **Intuitive Syntax**: Simple, memorable property-value pairs
 - 🎨 **Themeable**: Works with CSS variables for easy customization
 - 📱 **Responsive**: Built-in breakpoint system
@@ -27,7 +27,6 @@
 ## 📦 Installation
 
 ```bash
-# npm
 npm install unocss-preset-mingled -D
 ```
 
