@@ -1,8 +1,8 @@
 # UnoCSS Mingled Preset
 
-<p align="center">
-  <span style="font-size:100px">🧬</span>
-</p>
+<div align="center">
+  <h1 style="border:none">🧬</h1>
+</div>
 
 <p align="center">
   A concise CSS language for <a href="https://github.com/unocss/unocss">UnoCSS</a> that embraces being mingled with your HTML
